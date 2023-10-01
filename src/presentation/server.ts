@@ -1,12 +1,11 @@
-import express, { Router } from 'express';
 import path from 'path';
+import express, { Router } from 'express';
 
 interface Options {
   port: number;
   routes: Router;
   public_path?: string;
 }
-
 
 export class Server {
 
@@ -23,11 +22,8 @@ export class Server {
     this.routes = routes;
   }
 
-  
-  
   async start() {
     
-
     //* Middlewares
     this.app.use( express.json() ); // raw
     this.app.use( express.urlencoded({ extended: true }) ); // x-www-form-urlencoded
@@ -44,7 +40,6 @@ export class Server {
       res.sendFile(indexPath);
     });
     
-
     this.serverListener = this.app.listen(this.port, () => {
       console.log(`Server running on port ${ this.port }`);
     });
