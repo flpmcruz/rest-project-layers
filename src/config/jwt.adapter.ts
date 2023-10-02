@@ -11,13 +11,18 @@ export class JwtAdapter {
         { expiresIn: duration },
         (err, token) => {
           if (err) return resolve(null);
-          return resolve(token);
+          resolve(token);
         }
       );
     });
   }
 
   static validateToken(token: string) {
-    return "true";
+    return new Promise((resolve) => {
+      jwt.verify(token, envs.JWT_SEED, (err, decoded) => {
+        if (err) return resolve(null);
+        resolve(decoded);
+      });
+    });
   }
 }
