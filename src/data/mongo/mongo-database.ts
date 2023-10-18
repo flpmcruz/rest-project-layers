@@ -18,4 +18,15 @@ export class MongoDatabase {
       throw error;
     }
   }
+
+  static async disconnect() {
+    try {
+      await mongoose.disconnect();
+      console.log("Disconnected from MongoDB");
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 }
